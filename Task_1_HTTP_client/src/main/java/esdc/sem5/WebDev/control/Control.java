@@ -2,6 +2,7 @@ package esdc.sem5.WebDev.control;
 
 
 import esdc.sem5.WebDev.http.Client;
+import esdc.sem5.WebDev.json.Todo;
 
 import java.util.Locale;
 import java.util.Map;
@@ -13,6 +14,8 @@ public class Control {
         Commands.GET_ONE, Control::getOne,
         Commands.GET_ALL, Control::getAll,
         Commands.DELETE, Control::delete,
+        Commands.POST, Control::post,
+        Commands.PUT, Control::put,
         Commands.EXIT, Control::exit
     );
 
@@ -58,6 +61,16 @@ public class Control {
         return true;
     }
 
+    private static boolean put(Scanner scanner) {
+        CLIENT.put(getToDo(scanner));
+        return true;
+    }
+
+    private static boolean post(Scanner scanner) {
+        CLIENT.post(getToDo(scanner));
+        return true;
+    }
+
     private static boolean exit(Scanner scanner) {
         System.out.println("Exiting...");
         return false;
@@ -78,5 +91,24 @@ public class Control {
             }
         } while (isLoop);
         return id;
+    }
+
+    private static Todo getToDo(Scanner scanner) {
+        scanner.nextLine();
+        System.out.print("ID: ");
+        String idInput = scanner.nextLine();
+        Integer id = idInput.isBlank() ? null : Integer.parseInt(idInput);
+
+        System.out.print("User ID: ");
+        String userIdInput = scanner.nextLine();
+        Integer userId = userIdInput.isBlank() ? null : Integer.parseInt(userIdInput);
+
+        System.out.print("Title: ");
+        String title = scanner.nextLine();
+
+        System.out.print("Completed (true/false): ");
+        String completedInput = scanner.nextLine();
+        Boolean completed = completedInput.isBlank() ? null : Boolean.parseBoolean(completedInput);
+        return new Todo(id, userId, title, completed);
     }
 }

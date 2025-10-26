@@ -6,4 +6,18 @@ public record Todo(
         String title,
         Boolean completed
 ) {
+    public String toJson() {
+        return String.format("""
+                        {
+                          "id": %s,
+                          "userId": %s,
+                          "title": "%s",
+                          "completed": %s
+                        }
+                        """,
+                id == null ? "null" : id,
+                userId == null ? "null" : userId,
+                title,
+                completed);
+    }
 }

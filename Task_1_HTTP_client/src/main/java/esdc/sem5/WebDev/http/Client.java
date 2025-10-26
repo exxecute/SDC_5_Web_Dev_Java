@@ -1,5 +1,7 @@
 package esdc.sem5.WebDev.http;
 
+import esdc.sem5.WebDev.json.Todo;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -36,6 +38,22 @@ public class Client {
         if (resp != null && (resp.statusCode() == 200 || resp.statusCode() == 204)) {
             System.out.println("Deleted id " + id);
         }
+    }
+
+    public void post(Todo todo) {
+        exec(HttpRequest.newBuilder(URI.create(BASE_URL))
+                .header("Content-Type", "application/json; charset=UTF-8")
+                .POST(HttpRequest.BodyPublishers.ofString(todo.toJson()))
+                .timeout(Duration.ofSeconds(5))
+                .build());
+    }
+
+    public void put(Todo todo) {
+        exec(HttpRequest.newBuilder(URI.create(BASE_URL + todo.id()))
+                .header("Content-Type", "application/json; charset=UTF-8")
+                .PUT(HttpRequest.BodyPublishers.ofString(todo.toJson()))
+                .timeout(Duration.ofSeconds(5))
+                .build());
     }
 
     private HttpResponse<String> exec(HttpRequest req) {
