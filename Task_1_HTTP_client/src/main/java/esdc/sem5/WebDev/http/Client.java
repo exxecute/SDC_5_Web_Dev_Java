@@ -10,7 +10,7 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 
 public class Client {
-    private static final String BASE_URL = "https://jsonplaceholder.typicode.com/";
+    private static final String BASE_URL = "https://jsonplaceholder.typicode.com/todos/";
     private final HttpClient client = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(10))
             .build();

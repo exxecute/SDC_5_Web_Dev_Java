@@ -6,8 +6,6 @@ public enum Commands {
     DELETE("DELETE"),
     POST("POST"),
     PUT("PUT"),
-    SOLID("SOLID"),
-    KISS("KISS"),
     EXIT("EXIT");
 
     private final String value;
