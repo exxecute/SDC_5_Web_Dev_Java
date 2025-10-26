@@ -9,63 +9,66 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 
-public class Client {
+public class Client implements HttpService {
+
     private static final String BASE_URL = "https://jsonplaceholder.typicode.com/todos/";
     private final HttpClient client = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(10))
             .build();
 
-    public Client() {
-
-    }
-
-    public void getId(int id) {
-        exec(HttpRequest.newBuilder(URI.create(BASE_URL + id))
-                .GET().timeout(Duration.ofSeconds(20)).build());
-    }
-
+    @Override
     public void getAll() {
         exec(HttpRequest.newBuilder(URI.create(BASE_URL))
-                .GET().timeout(Duration.ofSeconds(20)).build());
-    }
-
-    public void delete(int id) {
-        HttpResponse<String> resp = exec(HttpRequest.newBuilder(URI.create(BASE_URL + id))
-                .DELETE()
-                .timeout(Duration.ofSeconds(5))
+                .GET()
+                .timeout(Duration.ofSeconds(10))
                 .build());
-
-        if (resp != null && (resp.statusCode() == 200 || resp.statusCode() == 204)) {
-            System.out.println("Deleted id " + id);
-        }
     }
 
+    @Override
+    public void getId(int id) {
+        exec(HttpRequest.newBuilder(URI.create(BASE_URL + id))
+                .GET()
+                .timeout(Duration.ofSeconds(10))
+                .build());
+    }
+
+    @Override
     public void post(Todo todo) {
         exec(HttpRequest.newBuilder(URI.create(BASE_URL))
                 .header("Content-Type", "application/json; charset=UTF-8")
                 .POST(HttpRequest.BodyPublishers.ofString(todo.toJson()))
-                .timeout(Duration.ofSeconds(5))
+                .timeout(Duration.ofSeconds(10))
                 .build());
     }
 
+    @Override
     public void put(Todo todo) {
+        if (todo.id() == null) {
+            System.out.println("PUT requires an ID!");
+            return;
+        }
         exec(HttpRequest.newBuilder(URI.create(BASE_URL + todo.id()))
                 .header("Content-Type", "application/json; charset=UTF-8")
                 .PUT(HttpRequest.BodyPublishers.ofString(todo.toJson()))
-                .timeout(Duration.ofSeconds(5))
+                .timeout(Duration.ofSeconds(10))
                 .build());
     }
 
-    private HttpResponse<String> exec(HttpRequest req) {
-        HttpResponse<String> resp = null;
+    @Override
+    public void delete(int id) {
+        exec(HttpRequest.newBuilder(URI.create(BASE_URL + id))
+                .DELETE()
+                .timeout(Duration.ofSeconds(10))
+                .build());
+    }
+
+    private void exec(HttpRequest request) {
         try {
-            resp = client.send(req, HttpResponse.BodyHandlers.ofString());
-            System.out.println("HTTP " + resp.statusCode());
-            System.out.println(resp.headers().map());
-            System.out.println(resp.body());
-        } catch (RuntimeException | IOException | InterruptedException e) {
-            System.out.println("Error");
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println("HTTP " + response.statusCode());
+            System.out.println(response.body());
+        } catch (IOException | InterruptedException e) {
+            System.out.println("Request error: " + e.getMessage());
         }
-        return resp;
     }
 }
