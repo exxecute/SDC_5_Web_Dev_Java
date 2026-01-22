@@ -1,12 +1,12 @@
 package com.webdev.sdc.repository;
 
+import com.webdev.sdc.exception.NotFoundException;
 import com.webdev.sdc.model.Currency;
 import com.webdev.sdc.model.CurrencyEntity;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -42,10 +42,58 @@ public class FileCurrencyRepository implements CurrencyRepository {
         return rates.entrySet()
                 .stream()
                 .map(entry -> new CurrencyEntity(
-                        (long) entry.getKey().ordinal(),
+                        (long) (entry.getKey().ordinal() + 1),
                         entry.getKey(),
                         entry.getValue()
                 ))
                 .toList();
+    }
+
+    @Override
+    public CurrencyEntity findById(Long id) {
+        if (id == null || id < 1 || id > rates.size()) {
+            throw new NotFoundException(id, "Currency");
+        }
+
+        int index = 0;
+
+        for (Map.Entry<Currency, Double> entry : rates.entrySet()) {
+            index++;
+            if (index == id) {
+                return new CurrencyEntity(
+                        id,
+                        entry.getKey(),
+                        entry.getValue()
+                );
+            }
+        }
+
+        throw new NotFoundException(id, "Currency");
+    }
+
+    @Override
+    public boolean existsByType(Currency type) {
+        return findAll().stream()
+                .anyMatch(c -> c.getType() == type);
+    }
+
+    @Override
+    public CurrencyEntity save(CurrencyEntity currency) {
+        if (currency == null) {
+            throw new IllegalArgumentException("CurrencyEntity must not be null");
+        }
+
+        if (currency.getType() == null) {
+            throw new IllegalArgumentException("Currency type must not be null");
+        }
+
+        if (rates.containsKey(currency.getType())) {
+            rates.put(currency.getType(), currency.getRate());
+            return currency;
+        }
+
+        rates.put(currency.getType(), currency.getRate());
+
+        return currency;
     }
 }
