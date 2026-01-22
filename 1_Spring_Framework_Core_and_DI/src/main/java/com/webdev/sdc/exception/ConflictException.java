@@ -1,5 +1,7 @@
 package com.webdev.sdc.exception;
 
+import org.springframework.http.HttpStatus;
+
 public class ConflictException extends GlobalException {
     public ConflictException(String message) {
         super(ConflictException.createMessage(message));
@@ -7,5 +9,15 @@ public class ConflictException extends GlobalException {
 
     private static String createMessage(String message) {
         return "Conflict Exception: " + message;
+    }
+
+    @Override
+    public HttpStatus getStatus() {
+        return HttpStatus.CONFLICT;
+    }
+
+    @Override
+    public String getName() {
+        return "Conflict Exception";
     }
 }

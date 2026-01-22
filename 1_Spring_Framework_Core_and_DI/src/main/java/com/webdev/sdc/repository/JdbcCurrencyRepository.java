@@ -1,6 +1,6 @@
 package com.webdev.sdc.repository;
 
-import com.webdev.sdc.exception.GlobalException;
+import com.webdev.sdc.exception.NotImplemented;
 import com.webdev.sdc.model.Currency;
 import com.webdev.sdc.model.CurrencyEntity;
 
@@ -34,26 +34,26 @@ public class JdbcCurrencyRepository implements CurrencyRepository {
 
     @Override
     public List<CurrencyEntity> findAll() {
-        throw new GlobalException("Not implemented");
+        throw new NotImplemented("JdbcCurrency");
     }
 
     @Override
     public CurrencyEntity findById(Long id) {
-        throw new GlobalException("Not implemented");
+        throw new NotImplemented("JdbcCurrency");
     }
 
     @Override
     public boolean existsByType(Currency type) {
-        throw new GlobalException("Not implemented");
+        throw new NotImplemented("JdbcCurrency");
     }
 
     @Override
     public CurrencyEntity save(CurrencyEntity currency) {
-        throw new GlobalException("Not implemented");
+        throw new NotImplemented("JdbcCurrency");
     }
 
     @Override
     public void deleteById(Long id) {
-        throw new GlobalException("Not implemented");
+        throw new NotImplemented("JdbcCurrency");
     }
 }

@@ -36,6 +36,15 @@ public class CurrencyController {
         return service.create(currecyDto);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<CurrencyEntity> update(
+            @PathVariable Long id,
+            @Valid @RequestBody CurrencyDto currencyDto) {
+
+        CurrencyEntity updated = service.update(id, currencyDto);
+        return ResponseEntity.ok(updated);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
