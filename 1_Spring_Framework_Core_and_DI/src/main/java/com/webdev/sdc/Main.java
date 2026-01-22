@@ -1,18 +1,35 @@
 package com.webdev.sdc;
 
+
 import com.webdev.sdc.config.AppConfig;
-import com.webdev.sdc.model.Currency;
-import com.webdev.sdc.service.CurrencyService;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import com.webdev.sdc.config.WebConfig;
+import org.apache.catalina.Context;
+import org.apache.catalina.LifecycleException;
+import org.apache.catalina.connector.Connector;
+import org.apache.catalina.startup.Tomcat;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
 
 public class Main {
-    public static void main(String[] args) {
-        AnnotationConfigApplicationContext ctx =
-                new AnnotationConfigApplicationContext(AppConfig.class);
+    public static void main(String[] args) throws LifecycleException {
+        Tomcat tomcat = new Tomcat();
+        Connector connector = new Connector();
+        connector.setPort(8080);
+        tomcat.setConnector(connector);
 
-        CurrencyService service = ctx.getBean(CurrencyService.class);
-        service.printRate(Currency.EUR);
+        Context context = tomcat.addContext("", System.getProperty("java.io.tmpdir"));
 
-        ctx.close();
+        AnnotationConfigWebApplicationContext webContext =
+                new AnnotationConfigWebApplicationContext();
+
+        webContext.register(AppConfig.class, WebConfig.class);
+        webContext.setServletContext(context.getServletContext());
+
+        DispatcherServlet dispatcherServlet = new DispatcherServlet(webContext);
+        Tomcat.addServlet(context, "currency", dispatcherServlet);
+        context.addServletMappingDecoded("/", "currency");
+
+        tomcat.start();
+        tomcat.getServer().await();
     }
 }

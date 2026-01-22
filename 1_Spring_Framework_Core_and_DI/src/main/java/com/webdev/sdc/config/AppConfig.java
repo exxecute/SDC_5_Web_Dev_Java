@@ -1,5 +1,6 @@
 package com.webdev.sdc.config;
 
+import com.webdev.sdc.lifecycle.LifecycleBean;
 import com.webdev.sdc.repository.CurrencyRepository;
 import com.webdev.sdc.repository.FileCurrencyRepository;
 import com.webdev.sdc.repository.JdbcCurrencyRepository;
@@ -41,5 +42,10 @@ public class AppConfig {
         DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setUrl("jdbc:h2:mem:testJdbc");
         return ds;
+    }
+
+    @Bean(initMethod = "init", destroyMethod = "destroy")
+    public LifecycleBean lifecycleBean() {
+        return new LifecycleBean();
     }
 }

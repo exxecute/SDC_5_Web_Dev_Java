@@ -1,11 +1,14 @@
 package com.webdev.sdc.repository;
 
+import com.webdev.sdc.exception.NotImplemented;
 import com.webdev.sdc.model.Currency;
+import com.webdev.sdc.model.CurrencyEntity;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
 public class JdbcCurrencyRepository implements CurrencyRepository {
     private final DataSource dataSource;
@@ -27,5 +30,30 @@ public class JdbcCurrencyRepository implements CurrencyRepository {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public List<CurrencyEntity> findAll() {
+        throw new NotImplemented("JdbcCurrency");
+    }
+
+    @Override
+    public CurrencyEntity findById(Long id) {
+        throw new NotImplemented("JdbcCurrency");
+    }
+
+    @Override
+    public boolean existsByType(Currency type) {
+        throw new NotImplemented("JdbcCurrency");
+    }
+
+    @Override
+    public CurrencyEntity save(CurrencyEntity currency) {
+        throw new NotImplemented("JdbcCurrency");
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        throw new NotImplemented("JdbcCurrency");
     }
 }
