@@ -1,11 +1,14 @@
 package com.webdev.sdc.repository;
 
 import com.webdev.sdc.model.Currency;
+import com.webdev.sdc.model.CurrencyEntity;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 public class FileCurrencyRepository implements CurrencyRepository {
@@ -32,5 +35,17 @@ public class FileCurrencyRepository implements CurrencyRepository {
     @Override
     public double getRate(Currency currency) {
         return rates.getOrDefault(currency, 0.0);
+    }
+
+    @Override
+    public List<CurrencyEntity> findAll() {
+        return rates.entrySet()
+                .stream()
+                .map(entry -> new CurrencyEntity(
+                        (long) entry.getKey().ordinal(),
+                        entry.getKey(),
+                        entry.getValue()
+                ))
+                .toList();
     }
 }

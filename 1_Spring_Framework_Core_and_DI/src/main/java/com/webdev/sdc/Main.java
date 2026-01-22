@@ -26,8 +26,8 @@ public class Main {
         webContext.setServletContext(context.getServletContext());
 
         DispatcherServlet dispatcherServlet = new DispatcherServlet(webContext);
-        Tomcat.addServlet(context, "dispatcher", dispatcherServlet);
-        context.addServletMappingDecoded("/", "dispatcher");
+        Tomcat.addServlet(context, "currency", dispatcherServlet);
+        context.addServletMappingDecoded("/", "currency");
 
         tomcat.start();
         tomcat.getServer().await();

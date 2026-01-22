@@ -1,8 +1,11 @@
 package com.webdev.sdc.service;
 
 import com.webdev.sdc.model.Currency;
+import com.webdev.sdc.model.CurrencyEntity;
 import com.webdev.sdc.repository.CurrencyRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CurrencyService {
@@ -12,7 +15,11 @@ public class CurrencyService {
         this.repository = repository;
     }
 
-    public void printRate(Currency currency) {
-        System.out.println(currency + " = " + repository.getRate(currency));
+    public void printRate(Currency currencyType) {
+        System.out.println(currencyType + " = " + repository.getRate(currencyType));
+    }
+
+    public List<CurrencyEntity> getAll() {
+        return repository.findAll();
     }
 }
