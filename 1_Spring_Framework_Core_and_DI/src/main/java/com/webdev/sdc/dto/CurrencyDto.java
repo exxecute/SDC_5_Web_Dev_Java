@@ -2,21 +2,21 @@ package com.webdev.sdc.dto;
 
 import com.webdev.sdc.model.Currency;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 public class CurrencyDto {
-    @NotBlank(message = "can't be blank")
+
+    @NotNull(message = "type can't be null")
     private Currency type;
-    @Min(value = 1, message = "must be greater")
+
+    @Positive(message = "rate must be greater than 0")
     private double rate;
 
-    public CurrencyDto() {
-
-    }
+    public CurrencyDto() { }
 
     public Currency getType() {
-        return this.type;
+        return type;
     }
 
     public void setType(Currency type) {
@@ -24,7 +24,7 @@ public class CurrencyDto {
     }
 
     public double getRate() {
-        return this.rate;
+        return rate;
     }
 
     public void setRate(double rate) {

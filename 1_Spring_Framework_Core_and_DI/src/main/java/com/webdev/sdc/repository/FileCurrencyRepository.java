@@ -93,7 +93,6 @@ public class FileCurrencyRepository implements CurrencyRepository {
         }
 
         rates.put(currency.getType(), currency.getRate());
-
-        return currency;
+        return findById((long) rates.size());
     }
 }
