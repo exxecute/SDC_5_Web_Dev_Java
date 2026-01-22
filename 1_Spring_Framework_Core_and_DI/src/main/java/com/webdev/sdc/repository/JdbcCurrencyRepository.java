@@ -51,4 +51,9 @@ public class JdbcCurrencyRepository implements CurrencyRepository {
     public CurrencyEntity save(CurrencyEntity currency) {
         throw new GlobalException("Not implemented");
     }
+
+    @Override
+    public void deleteById(Long id) {
+        throw new GlobalException("Not implemented");
+    }
 }

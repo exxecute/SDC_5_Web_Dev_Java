@@ -95,4 +95,26 @@ public class FileCurrencyRepository implements CurrencyRepository {
         rates.put(currency.getType(), currency.getRate());
         return findById((long) rates.size());
     }
+
+    @Override
+    public void deleteById(Long id) {
+        if (id == null || id < 1 || id > rates.size()) {
+            throw new NotFoundException(id, "Currency");
+        }
+
+        int index = 0;
+        Currency toRemove = null;
+
+        for (Currency currency : rates.keySet()) {
+            index++;
+            if (index == id) {
+                toRemove = currency;
+                break;
+            }
+        }
+
+        if (toRemove != null) {
+            rates.remove(toRemove);
+        }
+    }
 }

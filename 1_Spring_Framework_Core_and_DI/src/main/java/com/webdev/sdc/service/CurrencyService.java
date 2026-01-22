@@ -2,6 +2,7 @@ package com.webdev.sdc.service;
 
 import com.webdev.sdc.dto.CurrencyDto;
 import com.webdev.sdc.exception.ConflictException;
+import com.webdev.sdc.exception.GlobalException;
 import com.webdev.sdc.model.Currency;
 import com.webdev.sdc.model.CurrencyEntity;
 import com.webdev.sdc.repository.CurrencyRepository;
@@ -41,5 +42,12 @@ public class CurrencyService {
         );
 
         return this.repository.save(currecnyEntity);
+    }
+
+    public void delete(Long id) {
+        if (id == null) {
+            throw new GlobalException("id is null");
+        }
+        repository.deleteById(id);
     }
 }

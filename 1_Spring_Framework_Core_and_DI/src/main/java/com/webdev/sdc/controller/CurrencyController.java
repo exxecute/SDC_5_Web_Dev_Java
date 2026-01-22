@@ -4,6 +4,7 @@ import com.webdev.sdc.dto.CurrencyDto;
 import com.webdev.sdc.model.CurrencyEntity;
 import com.webdev.sdc.service.CurrencyService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -33,5 +34,11 @@ public class CurrencyController {
     @ResponseStatus(HttpStatus.CREATED)
     public CurrencyEntity create(@Valid @RequestBody CurrencyDto currecyDto) {
         return service.create(currecyDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.ok().build();
     }
 }

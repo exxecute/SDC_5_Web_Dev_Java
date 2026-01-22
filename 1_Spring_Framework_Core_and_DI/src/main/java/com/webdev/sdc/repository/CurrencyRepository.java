@@ -15,6 +15,6 @@ public interface CurrencyRepository {
     boolean existsByType(Currency type);
 
     CurrencyEntity save(CurrencyEntity currency);
-//
-//    void deleteById(Long id);
+
+    void deleteById(Long id);
 }
