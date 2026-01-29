@@ -9,7 +9,7 @@ import com.webdev.sdc.model.CurrencyEntity;
 import com.webdev.sdc.repository.CurrencyRepository;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @Service
