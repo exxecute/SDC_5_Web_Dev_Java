@@ -3,12 +3,16 @@ package com.webdev.sdc.repository;
 import com.webdev.sdc.exception.NotFoundException;
 import com.webdev.sdc.model.Currency;
 import com.webdev.sdc.model.CurrencyEntity;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Repository;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.*;
 
+@Repository
+@Profile("file")
 public class FileCurrencyRepository implements CurrencyRepository {
     private final Map<Long, CurrencyEntity> rates = new LinkedHashMap<>();
 
