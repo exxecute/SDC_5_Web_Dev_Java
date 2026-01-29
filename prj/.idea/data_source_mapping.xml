@@ -3,6 +3,8 @@
   <component name="DataSourcePerFileMappings">
     <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/2f1ffb16-686b-4876-91d5-e145f7cbce82/console.sql" value="2f1ffb16-686b-4876-91d5-e145f7cbce82" />
     <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/2f1ffb16-686b-4876-91d5-e145f7cbce82/console_1.sql" value="2f1ffb16-686b-4876-91d5-e145f7cbce82" />
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/2f1ffb16-686b-4876-91d5-e145f7cbce82/console_2.sql" value="2f1ffb16-686b-4876-91d5-e145f7cbce82" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/webdev/sdc/repository/JdbcCurrencyRepository.java" value="2f1ffb16-686b-4876-91d5-e145f7cbce82" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/schema.sql" value="2f1ffb16-686b-4876-91d5-e145f7cbce82" />
   </component>
 </project>
