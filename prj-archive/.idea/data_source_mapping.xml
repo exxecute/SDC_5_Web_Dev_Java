@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/227a7d42-28cb-4fbc-9451-a2bc2774bf7c/console.sql" value="227a7d42-28cb-4fbc-9451-a2bc2774bf7c" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/webdev/sdc/repository/JdbcCurrencyRepository.java" value="227a7d42-28cb-4fbc-9451-a2bc2774bf7c" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/data.sql" value="227a7d42-28cb-4fbc-9451-a2bc2774bf7c" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/schema.sql" value="227a7d42-28cb-4fbc-9451-a2bc2774bf7c" />
+  </component>
+</project>
