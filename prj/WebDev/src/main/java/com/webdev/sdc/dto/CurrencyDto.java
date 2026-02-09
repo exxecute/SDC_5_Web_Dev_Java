@@ -1,25 +1,22 @@
 package com.webdev.sdc.dto;
 
-import com.webdev.sdc.model.Currency;
-
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 
 public class CurrencyDto {
 
-    @NotNull(message = "type can't be null")
-    private Currency type;
+    @ValidCurrencyCode
+    private String type;
 
     @Positive(message = "rate must be greater than 0")
     private double rate;
 
     public CurrencyDto() { }
 
-    public Currency getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Currency type) {
+    public void setType(String type) {
         this.type = type;
     }
 

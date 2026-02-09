@@ -1,5 +1,6 @@
 package com.webdev.sdc.repository;
 
+import com.webdev.sdc.exception.NotFoundException;
 import com.webdev.sdc.model.CurrencyEntity;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;

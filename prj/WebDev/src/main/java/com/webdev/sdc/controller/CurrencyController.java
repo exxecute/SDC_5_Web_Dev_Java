@@ -1,8 +1,11 @@
 package com.webdev.sdc.controller;
 
+import com.webdev.sdc.dto.CurrencyDto;
 import com.webdev.sdc.model.ApiResponse;
 import com.webdev.sdc.model.CurrencyEntity;
 import com.webdev.sdc.service.CurrencyService;
+import jakarta.validation.Valid;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/currency")
+@Validated
 public class CurrencyController {
 
     private final CurrencyService service;
@@ -39,7 +43,7 @@ public class CurrencyController {
     @PostMapping
     public ApiResponse<CurrencyEntity> createCurrency(
             @RequestHeader("X-Client-Id") String clientId,
-            @RequestBody CurrencyEntity currency
+            @Valid @RequestBody CurrencyDto currency
     ) {
         System.out.println("Request from client: " + clientId);
 
@@ -50,7 +54,7 @@ public class CurrencyController {
     @PutMapping("/{id}")
     public ApiResponse<CurrencyEntity> updateCurrency(
             @PathVariable("id") Long id,
-            @RequestBody CurrencyEntity currency
+            @Valid @RequestBody CurrencyDto currency
     ) {
         Optional<CurrencyEntity> entity = service.updateCurrency(id, currency);
         return entity.map(currencyEntity -> new ApiResponse<>(currencyEntity, 1)).orElseGet(() -> new ApiResponse<>(null, 0));

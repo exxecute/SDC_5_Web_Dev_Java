@@ -2,8 +2,8 @@ package com.webdev.sdc.exception;
 
 import org.springframework.http.HttpStatus;
 
-public class NotImplemented extends GlobalException {
-    public NotImplemented(String message) {
+public class NotImplementedException extends GlobalException {
+    public NotImplementedException(String message) {
         super(createMessage(message));
     }
 

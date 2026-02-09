@@ -1,10 +1,12 @@
-package com.webdev.sdc.exception;
+---
+sidebar_position: 2
+---
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+# Rest Controller Advice
 
-import java.util.List;
+> 2. Create `@RestControllerAdvice` to handle validation errors and return user-friendly messages
 
+```java
 @RestControllerAdvice
 public class ExceptionHandler {
 
@@ -18,3 +20,4 @@ public class ExceptionHandler {
         return new ResponseEntity<>(errorResponse, ex.getStatus());
     }
 }
+```
