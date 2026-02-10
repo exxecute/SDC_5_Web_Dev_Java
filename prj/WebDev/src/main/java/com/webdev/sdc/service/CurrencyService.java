@@ -9,6 +9,7 @@ import com.webdev.sdc.model.CurrencyEntity;
 import com.webdev.sdc.repository.BankRepository;
 import com.webdev.sdc.repository.CurrencyRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,18 +25,22 @@ public class CurrencyService {
         this.bankRepository = bankRepository;
     }
 
+    @Transactional(readOnly = true)
     public List<CurrencyEntity> getAll() {
         return repository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public List<CurrencyEntity> getByType(String type) {
         return repository.findByType(type);
     }
 
+    @Transactional(readOnly = true)
     public Optional<CurrencyEntity> getCurrencyById(Long id) {
         return repository.findById(id);
     }
 
+    @Transactional()
     public CurrencyEntity createCurrency(CurrencyDto currency) {
         if (bankRepository.findById(currency.getBankId()).isPresent()) {
             BankEntity bank = bankRepository.findById(currency.getBankId()).get();
@@ -54,6 +59,7 @@ public class CurrencyService {
         }
     }
 
+    @Transactional()
     public Optional<CurrencyEntity> updateCurrency(Long id, CurrencyDto currency) {
         return repository.findById(id).map(existing -> {
             CurrencyEntity updated = new CurrencyEntity(id, currency.getType(), currency.getRate());
@@ -61,6 +67,7 @@ public class CurrencyService {
         });
     }
 
+    @Transactional()
     public boolean deleteCurrency(Long id) {
         if (Math.random() < 0.5) {
             throw new RandomException();

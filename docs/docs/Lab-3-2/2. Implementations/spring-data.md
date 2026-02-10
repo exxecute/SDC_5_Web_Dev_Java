@@ -1,12 +1,10 @@
-package com.webdev.sdc.repository;
+---
+sidebar_position: 1
+---
 
-import com.webdev.sdc.model.BankEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
+# Create Spring Data repository for all entities
 
-import java.util.*;
-
+```java
 @Repository
 public interface BankRepository extends JpaRepository<BankEntity, Long> {
 
@@ -19,3 +17,11 @@ public interface BankRepository extends JpaRepository<BankEntity, Long> {
     @Query("SELECT b FROM BankEntity b ORDER BY b.name ASC")
     List<BankEntity> findAllBanksOrderedByName();
 }
+```
+
+```java
+@Repository
+@Profile("jpa")
+public interface JpaCurrencyRepository extends JpaRepository<CurrencyEntity, Long>, CurrencyRepository {
+}
+```
