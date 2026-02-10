@@ -1,20 +1,10 @@
-package com.webdev.sdc.config;
+---
+sidebar_position: 3
+---
 
+# Configuration
 
-import com.webdev.sdc.exception.NotFoundException;
-import com.webdev.sdc.repository.CurrencyRepository;
-import com.webdev.sdc.repository.FileCurrencyRepository;
-import com.webdev.sdc.repository.JdbcCurrencyRepository;
-import com.webdev.sdc.repository.MapCurrencyRepository;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.util.ResourceUtils;
-
-import java.io.FileNotFoundException;
-
+```java title="Config"
 @Configuration
 @ComponentScan("com.webdev.sdc")
 @PropertySource("classpath:application.properties")
@@ -43,3 +33,41 @@ public class AppConfig {
         }
     }
 }
+```
+
+```java title="Repository types"
+public enum RepositoryType {
+    MAP("map"),
+    FILE("file"),
+    JDBC("jdbc");
+
+    private final String value;
+
+    RepositoryType(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public static RepositoryType from(String value) {
+        for (RepositoryType type : values()) {
+            if (type.value.equalsIgnoreCase(value)) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException("Unknown repository type: " + value);
+    }
+}
+```
+
+```java title="application.properties"
+filepath.rates=classpath:rates.txt
+repository.type=jdbc
+```
+
+```java title="rates.txt"
+USD=90.5
+EUR=98.2
+```

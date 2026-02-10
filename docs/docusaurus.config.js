@@ -88,6 +88,18 @@ const config = {
           },
           {
             type: 'docSidebar',
+            sidebarId: 'task1Sidebar',
+            position: 'left',
+            label: 'Task 1',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'task2Sidebar',
+            position: 'left',
+            label: 'Task 2',
+          },
+          {
+            type: 'docSidebar',
             sidebarId: 'lab2_1Sidebar',
             position: 'left',
             label: 'Lab 2.1',
@@ -115,18 +127,6 @@ const config = {
             sidebarId: 'lab4Sidebar',
             position: 'left',
             label: 'Lab 4',
-          },
-          {
-            type: 'docSidebar',
-            sidebarId: 'task1Sidebar',
-            position: 'left',
-            label: 'Task 1',
-          },
-          {
-            type: 'docSidebar',
-            sidebarId: 'task2Sidebar',
-            position: 'left',
-            label: 'Task 2',
           },
           {
             type: 'docSidebar',

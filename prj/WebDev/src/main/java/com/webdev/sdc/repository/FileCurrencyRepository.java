@@ -1,18 +1,12 @@
 package com.webdev.sdc.repository;
 
-import com.webdev.sdc.exception.NotFoundException;
-import com.webdev.sdc.model.Currency;
 import com.webdev.sdc.model.CurrencyEntity;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Repository;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.*;
 
-@Repository
-@Profile("file")
 public class FileCurrencyRepository implements CurrencyRepository {
     private final Map<Long, CurrencyEntity> rates = new LinkedHashMap<>();
 
@@ -27,7 +21,7 @@ public class FileCurrencyRepository implements CurrencyRepository {
 
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("=");
-                Currency currency = Currency.valueOf(parts[0]);
+                String currency = String.valueOf(parts[0]);
                 double rate = Double.parseDouble(parts[1]);
 
                 rates.put(id, new CurrencyEntity(id, currency, rate));
@@ -40,41 +34,17 @@ public class FileCurrencyRepository implements CurrencyRepository {
     }
 
     @Override
-    public double getRate(Currency currency) {
-        return rates.values().stream()
-                .filter(e -> e.getType() == currency)
-                .mapToDouble(CurrencyEntity::getRate)
-                .findFirst()
-                .orElse(0.0);
-    }
-
-    @Override
     public List<CurrencyEntity> findAll() {
         return new ArrayList<>(rates.values());
     }
 
     @Override
-    public CurrencyEntity findById(Long id) {
-        this.checkById(id);
-        return rates.get(id);
-    }
-
-    @Override
-    public boolean existsByType(Currency type) {
-        return rates.values().stream()
-                .anyMatch(e -> e.getType() == type);
+    public Optional<CurrencyEntity> findById(Long id) {
+        return Optional.ofNullable(rates.get(id));
     }
 
     @Override
     public CurrencyEntity save(CurrencyEntity currency) {
-        if (currency == null) {
-            throw new IllegalArgumentException("CurrencyEntity must not be null");
-        }
-
-        if (currency.getType() == null) {
-            throw new IllegalArgumentException("Currency type must not be null");
-        }
-
         Optional<Long> existingId = rates.entrySet().stream()
                 .filter(entry -> entry.getValue().getType() == currency.getType())
                 .map(Map.Entry::getKey)
@@ -95,13 +65,11 @@ public class FileCurrencyRepository implements CurrencyRepository {
 
     @Override
     public void deleteById(Long id) {
-        this.checkById(id);
         rates.remove(id);
     }
 
-    private void checkById(Long id) {
-        if (id == null || !rates.containsKey(id)) {
-            throw new NotFoundException(id, "Currency");
-        }
+    @Override
+    public List<CurrencyEntity> findByType(String type) {
+        return List.of();
     }
 }

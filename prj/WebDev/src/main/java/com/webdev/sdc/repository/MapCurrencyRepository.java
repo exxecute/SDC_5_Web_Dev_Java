@@ -1,14 +1,9 @@
 package com.webdev.sdc.repository;
 
-import com.webdev.sdc.exception.NotFoundException;
 import com.webdev.sdc.model.CurrencyEntity;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Repository
-@Primary
 public class MapCurrencyRepository implements CurrencyRepository{
     private final Map<Long, CurrencyEntity> currencyMap = new HashMap<>();
     private long currentId = 1;
