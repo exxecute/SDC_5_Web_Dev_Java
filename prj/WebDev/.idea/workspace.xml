@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="70782e35-9152-4c12-8ba4-1a60bd50e55f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../docs/docs/Lab-3-1/2. Implementations/new-entity.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/webdev/sdc/controller/BankController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/webdev/sdc/model/BankEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/webdev/sdc/repository/BankRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/webdev/sdc/service/BankService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/webdev/sdc/dto/CurrencyDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webdev/sdc/dto/CurrencyDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/webdev/sdc/model/CurrencyEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webdev/sdc/model/CurrencyEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/webdev/sdc/service/CurrencyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webdev/sdc/service/CurrencyService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/webdev/sdc/repository/BankRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/webdev/sdc/repository/BankRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/schema.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

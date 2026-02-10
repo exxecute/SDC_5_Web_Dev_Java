@@ -1,11 +1,17 @@
-package com.webdev.sdc.repository;
+---
+sidebar_position: 4
+---
 
-import com.webdev.sdc.model.BankEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+# Jpa Repositories
 
-import java.util.*;
+```java
+@Repository
+@Profile("jpa")
+public interface JpaCurrencyRepository extends JpaRepository<CurrencyEntity, Long>, CurrencyRepository {
+}
+```
 
+```java
 @Repository
 public interface BankRepository extends JpaRepository<BankEntity, Long> {
 
@@ -15,3 +21,4 @@ public interface BankRepository extends JpaRepository<BankEntity, Long> {
 
     List<BankEntity> findAll();
 }
+```
