@@ -29,6 +29,19 @@ public class Main {
         context.addServletMappingDecoded("/", "currency");
 
         tomcat.start();
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                System.out.println("Shutting down Tomcat gracefully...");
+                webContext.close();      // Spring context shutdown
+                tomcat.stop();           // Tomcat lifecycle stop
+                tomcat.destroy();        // Resource cleanup
+                System.out.println("Shutdown completed.");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }));
+
         tomcat.getServer().await();
     }
 }
