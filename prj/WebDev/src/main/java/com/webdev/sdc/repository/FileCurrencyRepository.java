@@ -1,16 +1,21 @@
 package com.webdev.sdc.repository;
 
 import com.webdev.sdc.model.CurrencyEntity;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Repository;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.*;
 
+@Profile("file")
+@Repository
 public class FileCurrencyRepository implements CurrencyRepository {
     private final Map<Long, CurrencyEntity> rates = new LinkedHashMap<>();
 
-    public FileCurrencyRepository(File file) {
+    public FileCurrencyRepository(@Value("${filepath.rates}") File file) {
         if (!file.exists() || !file.isFile()) {
             throw new IllegalArgumentException("Rates file not found: " + file.getAbsolutePath());
         }

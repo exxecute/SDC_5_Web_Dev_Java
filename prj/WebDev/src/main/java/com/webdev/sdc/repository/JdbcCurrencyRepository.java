@@ -2,11 +2,15 @@ package com.webdev.sdc.repository;
 
 import com.webdev.sdc.exception.NotImplementedException;
 import com.webdev.sdc.model.CurrencyEntity;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-public class JdbcCurrencyRepository implements CurrencyRepository{
+@Profile("jdbc")
+@Repository
+public class JdbcCurrencyRepository implements CurrencyRepository {
     @Override
     public List<CurrencyEntity> findAll() {
         throw new NotImplementedException("Jdbc repository");
