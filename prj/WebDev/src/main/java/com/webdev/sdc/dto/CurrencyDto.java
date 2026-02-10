@@ -10,6 +10,8 @@ public class CurrencyDto {
     @Positive(message = "rate must be greater than 0")
     private double rate;
 
+    private Long bankId;
+
     public CurrencyDto() { }
 
     public String getType() {
@@ -26,5 +28,16 @@ public class CurrencyDto {
 
     public void setRate(double rate) {
         this.rate = rate;
+    }
+
+    public Long getBankId() {
+        if (this.bankId == null) {
+            return 0L;
+        }
+        return this.bankId;
+    }
+
+    public void setBankId(Long bankId) {
+        this.bankId = bankId;
     }
 }

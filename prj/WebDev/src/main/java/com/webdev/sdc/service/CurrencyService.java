@@ -4,7 +4,9 @@ import com.webdev.sdc.dto.CurrencyDto;
 import com.webdev.sdc.exception.ConflictException;
 import com.webdev.sdc.exception.NotFoundException;
 import com.webdev.sdc.exception.RandomException;
+import com.webdev.sdc.model.BankEntity;
 import com.webdev.sdc.model.CurrencyEntity;
+import com.webdev.sdc.repository.BankRepository;
 import com.webdev.sdc.repository.CurrencyRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +16,12 @@ import java.util.Optional;
 @Service
 public class CurrencyService {
     private final CurrencyRepository repository;
+    private final BankRepository bankRepository;
     private Long id = 1L;
 
-    public CurrencyService(CurrencyRepository repository) {
+    public CurrencyService(CurrencyRepository repository, BankRepository bankRepository) {
         this.repository = repository;
+        this.bankRepository = bankRepository;
     }
 
     public List<CurrencyEntity> getAll() {
@@ -33,10 +37,20 @@ public class CurrencyService {
     }
 
     public CurrencyEntity createCurrency(CurrencyDto currency) {
-        if (repository.findByType(currency.getType()).isEmpty()) {
-            return repository.save(this.entityFromDto(currency));
+        if (bankRepository.findById(currency.getBankId()).isPresent()) {
+            BankEntity bank = bankRepository.findById(currency.getBankId()).get();
+            CurrencyEntity currencyEntity = this.entityFromDto(currency);
+            if (bank.getCurrencies().contains(currencyEntity)) {
+                throw new ConflictException("Currency exists");
+            } else {
+                List<CurrencyEntity> currencyEntities = bank.getCurrencies();
+                currencyEntities.add(currencyEntity);
+                bank.setCurrencies(currencyEntities);
+                bankRepository.save(bank);
+                return repository.save(currencyEntity);
+            }
         } else {
-            throw new ConflictException("Currency exists");
+            throw new NotFoundException(currency.getBankId(), "Bank");
         }
     }
 

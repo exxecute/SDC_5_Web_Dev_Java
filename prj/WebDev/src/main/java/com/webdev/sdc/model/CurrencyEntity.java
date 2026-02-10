@@ -1,9 +1,18 @@
 package com.webdev.sdc.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "currency")
 public class CurrencyEntity {
+    @Id
     private Long id;
     private String type;
     private double rate;
+
+    @ManyToOne
+    @JoinColumn(name = "bank_id")
+    private BankEntity bank;
 
     public CurrencyEntity() {    }
 
